@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><title>Статистика — локально</title>
+<style>body{font:15px system-ui;background:#101014;color:#eee;padding:24px}table{border-collapse:collapse;width:100%}
+td,th{border:1px solid #333;padding:6px 10px}th{background:#222}</style></head>
+<body><h2>Локальная статистика (файл живёт у вас на компьютере)</h2>
+<p>Скачайте выгрузку из Яндекс Метрики (отчёт «Источник → поисковый запрос → URL выхода») в CSV и загрузите ниже. Файл ничего не хранит на сервере: загрузили — посмотрели — удалили.</p>
+<input type="file" accept=".csv" onchange="load(this)"><div id="out"></div>
+<script>
+function load(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();
+r.onload=function(){var lines=r.result.split(/\r?\n/).filter(Boolean);
+var cnt={};for(var i=1;i<lines.length;i++){var cols=lines[i].split(/[;,]/);var src=(cols[0]||"").trim();
+if(src)cnt[src]=(cnt[src]||0)+1}
+var html="<h3>Сводка по первому столбцу</h3><table><tr><th>значение</th><th>строк</th></tr>";
+var ent=Object.entries(cnt).sort(function(a,b){return b[1]-a[1]}).slice(0,30);
+for(var j=0;j<ent.length;j++)html+="<tr><td>"+ent[j][0]+"</td><td>"+ent[j][1]+"</td></tr>";
+document.getElementById("out").innerHTML=html+"</table>"};r.readAsText(f)}
+</script></body></html>

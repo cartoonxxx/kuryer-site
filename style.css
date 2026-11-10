@@ -1,0 +1,50 @@
+
+:root{--bg:#101014;--card:#18181f;--line:#26262f;--txt:#e8e8ef;--mut:#9a9aa8;--acc:#ffd23f;--acc2:#ffb020}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line);position:relative;z-index:2}
+.logo{font-weight:800;font-size:20px;color:var(--txt)} .logo span{color:var(--acc)}
+.geobox{display:flex;gap:8px;align-items:center} .geobox span{color:var(--mut);font-size:13px}
+.btn{display:inline-block;background:var(--acc);color:#111;padding:10px 18px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+.btn.tiny{padding:6px 12px;font-size:13px}
+section{padding:34px 20px;max-width:1060px;margin:0 auto;position:relative;z-index:1}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15} h2{font-size:clamp(20px,3vw,28px);margin-bottom:14px}
+.lead{color:var(--mut);max-width:640px;margin-top:10px} .crumb{color:var(--mut);font-size:13px;margin-bottom:10px}
+.steps{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.step b{font-size:18px} .step span{color:var(--mut);font-size:14px} .step em{font-style:normal;color:var(--acc);font-weight:700}
+.step.max{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
+.step.max::after{content:"МАКСИМУМ";align-self:flex-start;background:var(--acc);color:#111;font-size:11px;font-weight:800;padding:2px 8px;border-radius:6px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.svc.no{opacity:.55} .svc-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.svc h3{font-size:18px}
+.badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.badge.ok{background:#123d1f;color:#7ee787} .badge.no{background:#3d1212;color:#ff8383}
+.badge.run{background:#3d2f12;color:#ffd23f} .badge.plan{background:#1d2d3d;color:#79b8ff}
+.badge.ukn{background:#2d2d38;color:#c9c9d4}
+.pay{color:var(--mut);font-size:13px}
+.note{background:#1d1d18;border:1px solid #3a3a20;border-radius:14px;padding:16px 20px;font-size:14px;color:#e6d9a8}
+.faq ol{padding-left:20px;display:grid;gap:8px;color:var(--mut)}
+footer{border-top:1px solid var(--line);padding:26px 20px 40px}
+.citynav{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px}
+.citynav a{color:var(--mut)} .citynav a:hover{color:var(--acc)}
+.small{color:var(--mut);font-size:12px;margin-top:16px}
+.hero{padding-top:60px;padding-bottom:10px}
+.geo-hint{margin-top:14px;display:none;background:var(--card);border:1px solid var(--acc);border-radius:12px;padding:12px 16px;max-width:480px}
+.geo-hint.show{display:block}
+/* ВАУ-вариант: включается классом wow на body */
+body.wow{background:radial-gradient(1200px 600px at 80% -10%,#2a2a10,transparent),var(--bg)}
+body.wow .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;animation:float 14s ease-in-out infinite alternate}
+body.wow .b1{width:420px;height:420px;background:#ffd23f33;top:-120px;left:-100px}
+body.wow .b2{width:360px;height:360px;background:#ff9d3f2b;top:30%;right:-120px;animation-delay:3s}
+body.wow .b3{width:300px;height:300px;background:#ffd23f22;bottom:-80px;left:30%;animation-delay:6s}
+@keyframes float{from{transform:translateY(0) scale(1)}to{transform:translateY(40px) scale(1.08)}}
+body.wow h1{background:linear-gradient(90deg,var(--acc),#ff9d3f);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.wow .svc,body.wow .step{background:rgba(24,24,31,.75);backdrop-filter:blur(8px)}
+body.wow .btn{transition:transform .15s ease,box-shadow .15s}
+body.wow .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,210,63,.25)}
+body.wow .step.max{animation:glow 2.4s ease-in-out infinite alternate}
+@keyframes glow{from{box-shadow:0 0 0 1px var(--acc) inset}to{box-shadow:0 0 22px rgba(255,210,63,.35)}}
+@media(max-width:640px){.geobox span{display:none}}

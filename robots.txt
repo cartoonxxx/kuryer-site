@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cartoonxxx.github.io/kuryer-site/sitemap.xml
