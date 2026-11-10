@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kurer-gid.ru/sitemap.xml
