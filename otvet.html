@@ -135,7 +135,7 @@
     }).catch(function () {});
 
     // Почта через FormSubmit (адрес в виде MD5-хеша)
-    fetch("https://formsubmit.co/ajax/" + FORM_HASH, {
+    fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ _captcha: "false", "Имя": name, "Телефон": fullPhone, "Город": city })
