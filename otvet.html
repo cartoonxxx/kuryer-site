@@ -98,7 +98,6 @@
 
   var phone = document.getElementById("phone");
 
-  // Маска: (999) 123-45-67, +7 прибито слева
   phone.addEventListener("input", function () {
     var d = phone.value.replace(/\D/g, "").slice(0, 10);
     var out = "";
@@ -116,32 +115,49 @@
     var city = document.getElementById("city").value.trim();
     var agree = document.getElementById("agree").checked;
 
-    if (digits.length !== 10) { phone.focus(); alert("Введите номер телефона полностью"); return; }
-    if (!name)  { document.getElementById("name").focus(); return; }
-    if (!city)  { document.getElementById("city").focus(); return; }
-    if (!agree) { return; }
+    if (digits.length !== 10) { alert("Введите номер телефона полностью"); phone.focus(); return; }
+    if (!name) { alert("Введите имя"); return; }
+    if (!city) { alert("Введите город"); return; }
+    if (!agree) { alert("Поставьте галочку про персональные данные"); return; }
 
     var fullPhone = "+7" + digits;
     var msg = "Новая заявка (Магнит)\nИмя: " + name +
               "\nТелефон: " + fullPhone +
               "\nГород: " + city;
+    var tgOk = false, mailOk = false;
 
-    // Telegram
     fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
-    }).catch(function () {});
+    }).then(function (r) {
+      if (r.ok) tgOk = true;
+      else return r.text().then(function (t) { alert("Telegram НЕ отправил, ответ: " + t); });
+    }).catch(function (err) {
+      alert("Telegram не отвечает. Скорее всего, страница открыта не через https (адрес начинается с file://). Ошибка: " + err);
+    });
 
-    // Почта через FormSubmit
     fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ _captcha: "false", "Имя": name, "Телефон": fullPhone, "Город": city })
-    }).catch(function () {});
+    }).then(function (r) {
+      if (r.ok) mailOk = true;
+      else return r.text().then(function (t) { alert("Почта НЕ отправлена, ответ: " + t); });
+    }).catch(function (err) {
+      alert("FormSubmit не отвечает. Ошибка: " + err);
+    });
 
-    document.getElementById("formBlock").hidden = true;
-    document.getElementById("okBlock").hidden = false;
+    setTimeout(function () {
+      document.getElementById("formBlock").hidden = true;
+      document.getElementById("okBlock").hidden = false;
+      if (tgOk || mailOk) {
+        var what = [];
+        if (tgOk) what.push("Telegram");
+        if (mailOk) what.push("почта");
+        alert("Доставлено: " + what.join(", "));
+      }
+    }, 2500);
   });
 </script>
 </body>
