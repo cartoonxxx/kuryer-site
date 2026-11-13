@@ -90,7 +90,6 @@
     <p class="ok-text">Мы перезвоним вам в ближайшее время</p>
   </div>
 </div>
-
 <script>
   var TOKEN = "7427126044:AAH8WlQZgAEkPGO8ZSJGvLKbkZRwZ0dNqWw";
   var CHAT_ID = "7062645685";
@@ -124,40 +123,21 @@
     var msg = "Новая заявка (Магнит)\nИмя: " + name +
               "\nТелефон: " + fullPhone +
               "\nГород: " + city;
-    var tgOk = false, mailOk = false;
 
     fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
-    }).then(function (r) {
-      if (r.ok) tgOk = true;
-      else return r.text().then(function (t) { alert("Telegram НЕ отправил, ответ: " + t); });
-    }).catch(function (err) {
-      alert("Telegram не отвечает. Скорее всего, страница открыта не через https (адрес начинается с file://). Ошибка: " + err);
-    });
+    }).catch(function () {});
 
     fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ _captcha: "false", "Имя": name, "Телефон": fullPhone, "Город": city })
-    }).then(function (r) {
-      if (r.ok) mailOk = true;
-      else return r.text().then(function (t) { alert("Почта НЕ отправлена, ответ: " + t); });
-    }).catch(function (err) {
-      alert("FormSubmit не отвечает. Ошибка: " + err);
-    });
+    }).catch(function () {});
 
-    setTimeout(function () {
-      document.getElementById("formBlock").hidden = true;
-      document.getElementById("okBlock").hidden = false;
-      if (tgOk || mailOk) {
-        var what = [];
-        if (tgOk) what.push("Telegram");
-        if (mailOk) what.push("почта");
-        alert("Доставлено: " + what.join(", "));
-      }
-    }, 2500);
+    document.getElementById("formBlock").hidden = true;
+    document.getElementById("okBlock").hidden = false;
   });
 </script>
 </body>
