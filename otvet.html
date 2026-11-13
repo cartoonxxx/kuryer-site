@@ -88,6 +88,7 @@
     </div>
     <div class="ok-mark">✓</div>
     <p class="ok-text">Мы перезвоним вам в ближайшее время</p>
+   <p id="diag" style="text-align:center;font-size:12px;color:#999;margin-top:10px;"></p>
   </div>
 </div>
 <script>
@@ -107,6 +108,10 @@
     phone.value = out;
   });
 
+  function setDiag(text) {
+    document.getElementById("diag").textContent = text;
+  }
+
   document.getElementById("lead").addEventListener("submit", function (e) {
     e.preventDefault();
     var digits = phone.value.replace(/\D/g, "");
@@ -124,17 +129,32 @@
               "\nТелефон: " + fullPhone +
               "\nГород: " + city;
 
+    var tgStatus = "...", mailStatus = "...";
+    setDiag("Отправляю…");
+
     fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
-    }).catch(function () {});
+    }).then(function (r) {
+      tgStatus = r.ok ? "доставлено" : "ошибка " + r.status;
+      setDiag("Telegram: " + tgStatus + " · Почта: " + mailStatus);
+    }).catch(function (err) {
+      tgStatus = "нет связи: " + err;
+      setDiag("Telegram: " + tgStatus + " · Почта: " + mailStatus);
+    });
 
     fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
       body: JSON.stringify({ _captcha: "false", "Имя": name, "Телефон": fullPhone, "Город": city })
-    }).catch(function () {});
+    }).then(function (r) {
+      mailStatus = r.ok ? "доставлено" : "ошибка " + r.status;
+      setDiag("Telegram: " + tgStatus + " · Почта: " + mailStatus);
+    }).catch(function (err) {
+      mailStatus = "нет связи: " + err;
+      setDiag("Telegram: " + tgStatus + " · Почта: " + mailStatus);
+    });
 
     document.getElementById("formBlock").hidden = true;
     document.getElementById("okBlock").hidden = false;
