@@ -92,10 +92,9 @@
 </div>
 
 <script>
-  // Токен бота собирается из фрагментов
-  var T1 = "7427126044", T2 = ":AAH8WlQZgA", T3 = "EkPGO8ZSJG", T4 = "vLKbkZRwZ0", T5 = "dNqWw";
-  var CHAT_ID = "7427126044";
-  var FORM_EMAIL = "9227020256@mail.ru"; // MD5 адреса почты для FormSubmit
+  var TOKEN = "7427126044:AAH8WlQZgAEkPGO8ZSJGvLKbkZRwZ0dNqWw";
+  var CHAT_ID = "7062645685";
+  var FORM_EMAIL = "9227020256@mail.ru";
 
   var phone = document.getElementById("phone");
 
@@ -128,13 +127,13 @@
               "\nГород: " + city;
 
     // Telegram
-    fetch("https://api.telegram.org/bot" + T1 + T2 + T3 + T4 + T5 + "bot" + 7427126044:AAH8WlQZgAEkPGO8ZSJGvLKbkZRwZ0dNqWw + "/sendMessage", {
+    fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ chat_id: CHAT_ID, text: msg })
     }).catch(function () {});
 
-    // Почта через FormSubmit (адрес в виде MD5-хеша)
+    // Почта через FormSubmit
     fetch("https://formsubmit.co/ajax/" + FORM_EMAIL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
