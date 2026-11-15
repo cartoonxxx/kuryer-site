@@ -65,6 +65,16 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
 .modal.open{display:flex}
 .modal-box{background:#fff;border-radius:14px;padding:24px;max-width:360px;width:90%;text-align:center}
 .modal-box .cta{margin-bottom:10px}
+
+  /* Мобильная адаптация таблицы сравнения: строки -> карточки */
+  @media (max-width: 640px){
+    .cmp{min-width:0;display:block}
+    .cmp tbody{display:block}
+    .cmp thead{display:none}
+    .cmp tr{display:block;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin:10px 0;background:#fff}
+    .cmp td{display:block;border:0;padding:3px 0}
+    .cmp td::before{content:attr(data-label)': ';display:inline-block;min-width:112px;color:#6B7280;font-weight:600;font-size:12px}
+  }
 </style>
 </head>
 <body>
@@ -91,13 +101,13 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
   <section id="services">
     <h2>Сравнение пяти сервисов</h2>
     <div class="tbl-wrap">
-    <table>
+    <table class="cmp">
       <tr><th>Сервис</th><th>Форматы</th><th>Слоты</th><th>Выплаты</th><th>Бонусы</th><th>Доход в месяц</th></tr>
-      <tr><td><b>Яндекс Еда</b></td><td>пешком, вело, электровел (только в Москве), авто</td><td>от 1 часа, плановые и свободные</td><td>ежедневно при СМЗ</td><td>бонус до 15 000 ₽; персональные цели</td><td>60 000–220 000 ₽</td></tr>
-      <tr><td><b>Лавка</b></td><td>пешком, электровел (только в Москве)</td><td>от 2 часов</td><td>ежедневно при СМЗ</td><td>цели: 50 заказов → 7 000 ₽</td><td>45 000–170 000 ₽</td></tr>
-      <tr><td><b>Купер</b></td><td>авто; пешком и вело — мелкие заказы</td><td>плановые и свободные, минималка за час</td><td>пятница; при высоком рейтинге — понедельник</td><td>цели: 142 заказа → 17 200 ₽</td><td>70 000–250 000 ₽</td></tr>
-      <tr><td><b>Магнит Доставка</b></td><td>пешком, вело, авто</td><td>от 4 часов; отмена за 12 часов</td><td>четверг за прошлую неделю</td><td>цели: 40 заказов за 3 дня → 5 000 ₽</td><td>50 000–260 000 ₽</td></tr>
-      <tr><td><b>X5</b></td><td>пешком, вело, авто</td><td>плановые и «Биржа»</td><td>четверг за прошлую неделю</td><td>акции и цели; «Импульс» до 120 000 ₽</td><td>75 000–250 000 ₽</td></tr>
+<tr><td data-label="Сервис"><b>Яндекс Еда</b></td><td data-label="Форматы">пешком, вело, электровел (только в Москве), авто</td><td data-label="Слоты">от 1 часа, плановые и свободные</td><td data-label="Выплаты">ежедневно при СМЗ</td><td data-label="Бонусы">бонус до 15 000 ₽; персональные цели</td><td data-label="Доход в месяц">60 000–220 000 ₽</td></tr>
+<tr><td data-label="Сервис"><b>Лавка</b></td><td data-label="Форматы">пешком, электровел (только в Москве)</td><td data-label="Слоты">от 2 часов</td><td data-label="Выплаты">ежедневно при СМЗ</td><td data-label="Бонусы">цели: 50 заказов → 7 000 ₽</td><td data-label="Доход в месяц">45 000–170 000 ₽</td></tr>
+<tr><td data-label="Сервис"><b>Купер</b></td><td data-label="Форматы">авто; пешком и вело — мелкие заказы</td><td data-label="Слоты">плановые и свободные, минималка за час</td><td data-label="Выплаты">пятница; при высоком рейтинге — понедельник</td><td data-label="Бонусы">цели: 142 заказа → 17 200 ₽</td><td data-label="Доход в месяц">70 000–250 000 ₽</td></tr>
+<tr><td data-label="Сервис"><b>Магнит Доставка</b></td><td data-label="Форматы">пешком, вело, авто</td><td data-label="Слоты">от 4 часов; отмена за 12 часов</td><td data-label="Выплаты">четверг за прошлую неделю</td><td data-label="Бонусы">цели: 40 заказов за 3 дня → 5 000 ₽</td><td data-label="Доход в месяц">50 000–260 000 ₽</td></tr>
+<tr><td data-label="Сервис"><b>X5</b></td><td data-label="Форматы">пешком, вело, авто</td><td data-label="Слоты">плановые и «Биржа»</td><td data-label="Выплаты">четверг за прошлую неделю</td><td data-label="Бонусы">акции и цели; «Импульс» до 120 000 ₽</td><td data-label="Доход в месяц">75 000–250 000 ₽</td></tr>
     </table>
     </div>
     <div class="plashka">Курьерка — это про большие деньги без перспектив. Ветер в лицо и полная свобода действий. Ты хозяин своей работы.</div>
