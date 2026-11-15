@@ -115,7 +115,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
         <p>Слоты от 1 часа — плановые и свободные, плановые дают гарантированную минималку за час.</p>
         <p class="lbl">Кому подходит</p>
         <p>Студентам на вечерних сменах, совмещающим после работы, тем, кому нужна оплата каждый день.</p>
-        <a class="cta" href="#" onclick="goCity();return false;">Стать курьером</a>
+        <a class="cta" href="#" onclick="goCity('eda');return false;">Стать курьером</a>
       </div>
       <div class="card c-lavka">
         <h3>Лавка</h3>
@@ -126,7 +126,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
         <p>Слоты от 2 часов, выходы «на пару часов» — типичный сценарий этого сервиса.</p>
         <p class="lbl">Кому подходит</p>
         <p>Мамам в декрете, пенсионерам, женщинам — всем, кто хочет ходить пешком в своём районе.</p>
-        <a class="cta" href="#" onclick="goCity();return false;">Стать курьером</a>
+        <a class="cta" href="#" onclick="goCity('lavka');return false;">Стать курьером</a>
       </div>
       <div class="card c-kuper">
         <h3>Купер</h3>
@@ -137,7 +137,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
         <p>Слоты плановые и свободные, минималка за час или гарантия за стоимость заказа.</p>
         <p class="lbl">Кому подходит</p>
         <p>Курьерам с личным авто, для которых курьер — основная работа.</p>
-        <a class="cta" href="#" onclick="goCity();return false;">Стать курьером</a>
+        <a class="cta" href="#" onclick="goCity('kuper');return false;">Стать курьером</a>
       </div>
       <div class="card c-magnit">
         <h3>Магнит Доставка</h3>
@@ -148,7 +148,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
         <p>Слоты от 4 часов, отмена за 12 часов до начала; план строится на 3–7 дней вперёд по рейтингу.</p>
         <p class="lbl">Кому подходит</p>
         <p>Тем, кто хочет длинные смены с одним маршрутом: основная занятость или вторая работа по выходным.</p>
-        <a class="cta" href="#" onclick="goCity();return false;">Стать курьером</a>
+        <a class="cta" href="#" onclick="goCity('magnit');return false;">Стать курьером</a>
       </div>
       <div class="card c-x5">
         <h3>X5</h3>
@@ -159,7 +159,7 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
         <p>Плановый слот и свободный слот «Биржа» — придуман для подработки, только для граждан РФ.</p>
         <p class="lbl">Кому подходит</p>
         <p>Тем, кто хочет подработку без обязательств: свободный слот «Биржа» — выход, когда удобно, без плановой смены.</p>
-        <a class="cta" href="#" onclick="goCity();return false;">Стать курьером</a>
+        <a class="cta" href="#" onclick="goCity('x5');return false;">Стать курьером</a>
       </div>
     </div>
   </section>
@@ -187,20 +187,29 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
 <div class="modal" id="cityModal">
   <div class="modal-box">
     <p style="font-weight:700;margin-bottom:14px;">Выберите ваш город</p>
-    <a class="cta" href="/moskva/" onclick="try{localStorage.setItem('city','moskva')}catch(e){}">Москва</a>
-    <a class="cta" href="/spb/" style="background:#0066ff;" onclick="try{localStorage.setItem('city','spb')}catch(e){}">Санкт-Петербург</a>
+    <a class="cta" href="#" onclick="return pickCity('moskva');">Москва</a>
+    <a class="cta" href="#" style="background:#0066ff;" onclick="return pickCity('spb');">Санкт-Петербург</a>
     <p style="margin-top:10px;"><a href="#" onclick="closeModal();return false;" style="color:var(--muted);">Отмена</a></p>
   </div>
 </div>
 
 <script>
-function openModal(){ document.getElementById('cityModal').classList.add('open'); }
+var pendingService = null;
+function openModal(service){ pendingService = service || null; document.getElementById('cityModal').classList.add('open'); }
 function closeModal(){ document.getElementById('cityModal').classList.remove('open'); }
-function goCity(){
+function goCity(service){
   var saved = null;
   try { saved = localStorage.getItem('city'); } catch(e){}
-  if (saved === 'moskva' || saved === 'spb') { location.href = '/' + saved + '/'; return; }
-  openModal();
+  if (saved === 'moskva' || saved === 'spb') {
+    location.href = '/' + saved + '/' + (service ? service + '/' : '');
+    return;
+  }
+  openModal(service);
+}
+function pickCity(city){
+  try { localStorage.setItem('city', city); } catch(e){}
+  location.href = '/' + city + '/' + (pendingService ? pendingService + '/' : '');
+  return false;
 }
 </script>
 </body>
