@@ -1,0 +1,60 @@
+# Курьерский центр
+
+> Площадка для трудоустройства курьерами в сервисы доставки: Яндекс Еда, Яндекс Лавка, Магнит, Купер и Х5. Города: Москва и Санкт-Петербург. На сайте — сравнение сервисов, условия и выплаты, калькулятор дохода, страницы районов и аудиторий, заявка на оформление за 2 минуты.
+
+## Города
+
+- [Работа курьером в Москве](https://couriercenter.ru/moskva/index.html): сравнение 5 сервисов, доходы от 80 000 до 300 000 ₽, калькулятор, FAQ.
+- [Работа курьером в Санкт-Петербурге](https://couriercenter.ru/spb/index.html): те же сервисы и условия для СПб.
+
+## Сервисы в Москве
+
+- [Яндекс Еда](https://couriercenter.ru/moskva/eda/index.html): плановые и свободные слоты, при СМЗ расчёт каждый день, электробайк за 1 ₽ в неделю при 70 заказах.
+- [Яндекс Лавка](https://couriercenter.ru/moskva/lavka/index.html): плановые слоты от 2 часов, дарксторы в радиусе около 1 км, расчёт каждый день.
+- [Магнит](https://couriercenter.ru/moskva/magnit/index.html): плановые слоты от 4 часов, выплата в четверг, доплата за бензин автокурьерам.
+- [Купер](https://couriercenter.ru/moskva/kuper/index.html): плановые слоты с надбавками за длинные смены и свободный слот, выплата в пятницу.
+- [Х5 — Пятёрочка, Перекрёсток, Чижик](https://couriercenter.ru/moskva/x5/index.html): плановый или свободный слот, полигоны вокруг магазинов, выплата в четверг.
+
+## Сегменты и форматы работы в Москве
+
+- [Студентам](https://couriercenter.ru/moskva/studentam/index.html): слоты по вечерам и выходным, 1–2 смены между парами.
+- [Совмещение с основной работой](https://couriercenter.ru/moskva/sovmeshchenie/index.html): при СМЗ обязательных смен нет.
+- [С ежедневной оплатой](https://couriercenter.ru/moskva/ezhednevnaya-oplata/index.html): при СМЗ в Еде и Лавке деньги на следующий день.
+- [Для пенсионеров](https://couriercenter.ru/moskva/pensionery/index.html): работа без опыта, гибкий график.
+- [Смены на полный день](https://couriercenter.ru/moskva/na-polnyi-den/index.html): длинные плановые смены с надбавками.
+- [Работа рядом с домом](https://couriercenter.ru/moskva/ryadom-s-domom/index.html): слоты в своём районе, зона выбирается в приложении.
+- [Ночные смены](https://couriercenter.ru/moskva/nochnye-smeny/index.html): ночные слоты у Еды, Лавки и Х5.
+
+## Районы Москвы
+
+- [Все районы](https://couriercenter.ru/moskva/raioni/index.html): страницы районов со слотами у метро.
+- [Митино](https://couriercenter.ru/moskva/raioni/mitino/index.html)
+- [Хамовники](https://couriercenter.ru/moskva/raioni/hamovniki/index.html)
+- [Сокольники](https://couriercenter.ru/moskva/raioni/sokolniki/index.html)
+- [Марьино](https://couriercenter.ru/moskva/raioni/marino/index.html)
+- [Орехово-Борисово](https://couriercenter.ru/moskva/raioni/orehovo-borisovo/index.html)
+- [Ховрино](https://couriercenter.ru/moskva/raioni/hovrino/index.html)
+- [Кузьминки](https://couriercenter.ru/moskva/raioni/kuzminki/index.html)
+- [Гольяново](https://couriercenter.ru/moskva/raioni/golyanovo/index.html)
+
+## Санкт-Петербург
+
+- [Работа курьером в СПб](https://couriercenter.ru/spb/index.html)
+- [Студентам](https://couriercenter.ru/spb/studentam/index.html)
+- [Совмещение с основной работой](https://couriercenter.ru/spb/sovmeshchenie/index.html)
+- [Мамам в декрете](https://couriercenter.ru/spb/mamy-v-dekrete/index.html)
+- [Пенсионерам и женщинам](https://couriercenter.ru/spb/pensioneram-i-zhenshchinam/index.html)
+- [Самозанятость и иностранцы](https://couriercenter.ru/spb/samozanyatost-i-inostrantsy/index.html)
+- [Яндекс Еда](https://couriercenter.ru/spb/eda/index.html)
+- [Яндекс Лавка](https://couriercenter.ru/spb/lavka/index.html)
+- [Магнит](https://couriercenter.ru/spb/magnit/index.html)
+- [Купер](https://couriercenter.ru/spb/kuper/index.html)
+- [Х5](https://couriercenter.ru/spb/x5/index.html)
+
+## Общие условия
+
+- Форматы работы: СМЗ и ГПХ, опыт не нужен, обучение до 15 минут.
+- Выплаты: при СМЗ в Еде и Лавке — на следующий день, Купер — пятница, Магнит и Х5 — четверг.
+- Слоты: плановые (занимаются заранее, отмена не позднее 12:00 накануне) и свободные (от одного заказа); больше 12 часов в сутки взять нельзя.
+- Транспорт: пешком без транспорта, электровело за 1 ₽ в Еде, Лавке и Купере, автокурьерам Магнита доплата за бензин.
+- Оформление: гражданам РФ — онлайн (у Еды и Лавки — в приложении), гражданам СНГ — через курьерский центр с полным пакетом документов.
