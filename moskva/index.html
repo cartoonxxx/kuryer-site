@@ -204,13 +204,13 @@
 
   <div class="svc">
     <h3>Купер</h3>
-    <p>Плановые слоты с надбавками за длинные смены к дневной зарплате 5-10% плюс свободный слот. При СМЗ расчёт раз в неделю по пятницам. Ежедневный бонус от 12 000 за 38 заказов. Персональная цель 420 заказов — до 50 000 ₽. Электровелосипед за 1 ₽.</p>
+    <p>Плановые слоты с надбавками за длинные смены к дневной зарплате 5-10% плюс свободный слот. При СМЗ расчёт раз в неделю по пятницам. Ежедневный бонус от 12 000 за 38 заказов. Персональная цель 420 заказов — до 50 000 ₽. Электровелосипед за 1 ₽. Платят пешим курьерам от 90 000 ₽ в месяц.</p>
     <a class="btn btn-kuper" href="kuper/index.html">Стать курьером Купер</a>
   </div>
 
   <div class="svc">
     <h3>Х5 (Пятёрочка, Перекрёсток, Чижик)</h3>
-    <p>Плановый слот или свободный слот. Осенняя акция «Импульс» — до 120 000 ₽ за четыре месяца плюсом к основному заработку, выплата в четверг через Т-Банк. Свободный слот — только для граждан РФ.</p>
+    <p>Плановый слот или свободный слот «Биржа». Осенняя акция «Импульс» — до 120 000 ₽ за четыре месяца плюсом к основному заработку, выплата в четверг для самозанятых через Т-Банк. Свободный слот — только для граждан РФ. Платят пешим курьерам от 85 000 ₽ в месяц.</p>
     <a class="btn btn-x5" href="x5/index.html">Стать курьером Х5</a>
   </div>
 
@@ -245,24 +245,6 @@
     <a href="ryadom-s-domom/index.html" style="border:1px solid #2B5CFF;color:#2B5CFF;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:500;text-decoration:none;display:inline-block">Работа рядом с домом</a>
     <a href="nochnye-smeny/index.html" style="border:1px solid #2B5CFF;color:#2B5CFF;border-radius:999px;padding:6px 13px;font-size:14px;font-weight:500;text-decoration:none;display:inline-block">Ночные смены</a>
 
-  </div>
-
-  <h2>Калькулятор дохода курьера в Москве</h2>
-  <div class="calc">
-    <div class="tabs" id="tabs">
-      <button type="button" class="tab on" data-t="foot">Пеший</button>
-      <button type="button" class="tab" data-t="velo">Велосипед / электровело</button>
-      <button type="button" class="tab" data-t="auto">Авто</button>
-    </div>
-    <div class="row">
-      <label>Часов в день <b id="hrsV">8</b></label>
-      <input type="range" id="hrs" min="1" max="12" value="8" step="1">
-    </div>
-    <div class="row">
-      <label>Дней в неделю <b id="daysV">5</b></label>
-      <input type="range" id="days" min="1" max="7" value="5" step="1">
-    </div>
-    <div class="res" id="res">Доход в месяц: от 38 000 ₽</div>
   </div>
 
   <h2>Кто может работать курьером в Москве</h2>
@@ -349,39 +331,5 @@
   © Курьерский центр · couriercenter.ru
 </footer>
 
-<script>
-// Ставки калькулятора — московские: доход = дни × часы × ставка за час × 4,33 недели, округление до 1 000 ₽.
-var RATES = { foot: 220, velo: 550, auto: 715 };
-var transport = "foot";
-
-function fmt(n) {
-  return Math.round(n / 1000) * 1000;
-}
-function show(n) {
-  return fmt(n).toLocaleString("ru-RU");
-}
-
-function calc() {
-  var h = +document.getElementById("hrs").value;
-  var d = +document.getElementById("days").value;
-  document.getElementById("hrsV").textContent = h;
-  document.getElementById("daysV").textContent = d;
-  document.getElementById("res").textContent = "Доход в месяц: " + show(d * h * 4.33 * RATES[transport]) + " ₽";
-}
-
-document.getElementById("hrs").addEventListener("input", calc);
-document.getElementById("days").addEventListener("input", calc);
-
-document.getElementById("tabs").addEventListener("click", function (e) {
-  var t = e.target.closest(".tab");
-  if (!t) return;
-  transport = t.dataset.t;
-  document.querySelectorAll(".tab").forEach(function (x) { x.classList.remove("on"); });
-  t.classList.add("on");
-  calc();
-});
-
-calc();
-</script>
 </body>
 </html>
