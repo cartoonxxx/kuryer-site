@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Работа курьером пенсионеру и женщине в СПб — дневные слоты с 8:00 2026 | Курьерский центр</title>
 <meta name="description" content="Работа курьером для пенсионеров и женщин в СПб: дневные слоты с 8:00 утра, короткие пешие маршруты, индексация пенсии при СМЗ сохраняется, без ночных смен.">
-<link rel="canonical" href="https://couriercenter.ru/spb/pensioneram-i-zhenshchinamindex/index.html">
+<link rel="canonical" href="https://couriercenter.ru/spb/pensioneram-i-zhenshchinam/index.html">
 <link rel="alternate" hreflang="ru" href="https://couriercenter.ru/spb/pensioneram-i-zhenshchinamindex/index.html">
 <link rel="alternate" hreflang="x-default" href="https://couriercenter.ru/spb/pensioneram-i-zhenshchinamindex/index.html">
 <style>
@@ -51,8 +51,8 @@ ul.list li{margin-bottom:6px}
 .back a{display:inline-block;border:1.5px solid #2B5CFF;border-radius:999px;padding:3px 14px;background:#fff;font-weight:600;color:#2B5CFF;text-decoration:none}
 footer{text-align:center;padding:24px 16px;color:#6B7280;font-size:13px}
 </style>
-
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Можно ли пенсионеру работать курьером?","acceptedAnswer":{"@type":"Answer","text":"Да: возрастного потолка нет — работают и в 60, и в 70. Ограничений по выходу на смены для пенсионеров не вводится."}},{"@type":"Question","name":"Не пострадает ли пенсия и индексация?","acceptedAnswer":{"@type":"Answer","text":"При самозанятости индексация не отменяется: СМЗ не считается работой, работодатель и стаж не затрагиваются. При оформлении по ГПХ уточните условия в СФР до подписания договора."}},{"@type":"Question","name":"Какая физическая нагрузка?","acceptedAnswer":{"@type":"Answer","text":"Пешие маршруты — короткие: в Лавке до 1 км от даркстора, заказы лёгкие. Крупные корзины продуктов — на авто в Купере и Х5: тяжёлые сумки на плечо не обязательны."}},{"@type":"Question","name":"Какие смены удобнее?","acceptedAnswer":{"@type":"Answer","text":"Дневные с 8:00 утра до 17:00 — дороги свободнее, заказы идут ровно, без вечерней гонки. Ночные смены не обязательны — берите утро и день."}},{"@type":"Question","name":"Когда приходят выплаты?","acceptedAnswer":{"@type":"Answer","text":"СМЗ — ежедневно или еженедельно (зависит от сервиса). ГПХ — раз в две недели, график зависит от парка. Бонусы и чаевые — по средам."}},{"@type":"Question","name":"Что делать, если не могу выйти на плановый слот?","acceptedAnswer":{"@type":"Answer","text":"Отменяйте не позднее 12:00 накануне — слот считается честно отменённым. Опоздание больше 30 минут равно невыходу."}},{"@type":"Question","name":"Какие документы нужны для оформления?","acceptedAnswer":{"@type":"Answer","text":"Паспорт. Для ГПХ дополнительно СНИЛС и ИНН. СМЗ — регистрация в приложении «Мой налог» занимает около 10 минут."}},{"@type":"Question","name":"Нужна ли медкнижка?","acceptedAnswer":{"@type":"Answer","text":"Для доставки продуктов (Лавка, Магнит, Х5, Купер) — да, оформляется в СПб за 1–2 дня. Уточните у оператора, компенсирует ли сервис её стоимость."}},{"@type":"Question","name":"Можно ли совмещать два сервиса?","acceptedAnswer":{"@type":"Answer","text":"Да: плановые слоты в одном — свободные выходы в другом. Запретов на одновременную работу в разных сервисах нет."}}]}</script>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -66,6 +66,7 @@ footer{text-align:center;padding:24px 16px;color:#6B7280;font-size:13px}
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/114309255" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 </head>
 <body>
 <header class="top">
@@ -184,7 +185,15 @@ footer{text-align:center;padding:24px 16px;color:#6B7280;font-size:13px}
   <div class="back"><a href="../index.html"><span class="pill">← Все сервисы в Санкт-Петербурге</span></a><a href="../../index.html"><span class="pill">← На главную</span></a></div>
 </main>
 
-<footer>© Курьерский центр · couriercenter.ru</footer>
+
+<footer>
+  <div id="footer"></div>
+  <script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => { document.getElementById('footer').innerHTML = html; });
+  </script>
+</footer>
 
 
 <script>
