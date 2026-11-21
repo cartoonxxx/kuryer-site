@@ -226,10 +226,16 @@ footer{border-top:1px solid var(--line);padding:20px 0;margin-top:24px;color:var
   </section>
 
   <footer>
-    <div class="wrap">
-      <p><b>Города присутствия:</b> <a href="/moskva/">Москва</a>, <a href="/spb/">Санкт-Петербург</a></p>
-    </div>
-  </footer>
+  <div class="wrap">
+    <p><b>Города присутствия:</b> <a href="/moskva/">Москва</a>, <a href="/spb/">Санкт-Петербург</a></p>
+    <div id="footer"></div>
+    <script>
+    fetch('/footer.html')
+      .then(r => r.text())
+      .then(html => { document.getElementById('footer').innerHTML = html; });
+    </script>
+  </div>
+</footer>
 </div>
 
 <div class="modal" id="cityModal">
