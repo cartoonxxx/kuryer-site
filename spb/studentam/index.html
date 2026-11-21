@@ -202,7 +202,14 @@ footer{text-align:center;padding:24px 16px;color:#6B7280;font-size:13px}
   <div class="back"><a href="../index.html"><span class="pill">← Все сервисы в Санкт-Петербурге</span></a><a href="../../index.html"><span class="pill">← На главную</span></a></div>
 </main>
 
-<footer>© Курьерский центр · couriercenter.ru</footer>
+<footer>
+  <div id="footer"></div>
+  <script>
+  fetch('/footer.html')
+    .then(r => r.text())
+    .then(html => { document.getElementById('footer').innerHTML = html; });
+  </script>
+</footer>
 
 <script>
 var TR={foot:165,velo:412,auto:563};
