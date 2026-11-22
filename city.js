@@ -135,7 +135,7 @@ modal.innerHTML='<div style="background:#fff;border-radius:14px;padding:24px;max
   +'<p style="margin-top:10px"><a href="#" id="modalClose" style="color:#6B7280">Отмена</a></p></div>';
 document.body.appendChild(modal);
 
-function btn(c){return '<a href="#" data-slug="'+c.slug+'" style="display:block;text-align:center;background:#fff;color:#1a1a1a;font-weight:600;font-size:16px;padding:11px 16px;border:1px solid #E3E7EC;border-radius:999px;text-decoration:none;margin-bottom:8px">'+c.name+'</a>';}
+function btn(c){return '<a href="#" data-slug="'+c.slug+'" style="display:block;text-align:center;background:#2B5CFF;color:#fff;font-weight:600;font-size:16px;padding:13px;border-radius:12px;text-decoration:none;margin-bottom:8px">'+c.name+'</a>';}
 document.getElementById('modalMain').innerHTML=CITIES.slice(0,2).map(btn).join('');
 document.getElementById('modalMsk').innerHTML=CITIES.slice(2).map(btn).join('');
 document.getElementById('modalClose').addEventListener('click',function(e){e.preventDefault();closeModal();});
@@ -148,5 +148,6 @@ if(cl){cl.innerHTML=CITIES.map(function(c){return '<a href="'+cityPath(c)+'">'+c
 
 detect();
 })();
+
 
 
