@@ -45,19 +45,22 @@ function getSaved(){try{return localStorage.getItem('city');}catch(e){return nul
 
 var pendingService=null;
 var modal=null;
+var bar=null;
 
 /* Открытие/закрытие — напрямую через display, классы тут не работают:
    инлайновый display:none перебивает любое CSS-правило */
 function openModal(s){
   pendingService=s||null;
-  if(modal)modal.style.display='flex';
+  hideBar();
+  modal.style.display='flex';
 }
-function closeModal(){if(modal)modal.style.display='none';}
+function closeModal(){modal.style.display='none';}
 function pickCity(slug){
   save(slug);
+  hideBar();
   var c=findCity(slug);
   if(c){
-    closeModal();
+    modal.style.display='none';
     location.href=cityPath(c)+(pendingService?pendingService+'/':'');
   }
   return false;
@@ -74,6 +77,21 @@ window.goCity=goCity;
 
 function norm(s){return (s||'').toLowerCase().replace(/\s+/g,' ').replace(/ё/g,'е');}
 
+/* Плашка «Ваш город — X?» — показывается один раз, до первого подтверждения */
+function hideBar(){if(bar){bar.remove();bar=null;}}
+function showBar(cityName,yesLabel,onYes,onNo){
+  if(bar)return;
+  bar=document.createElement('div');
+  bar.id='cityBar';
+  bar.style.cssText='display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;max-width:960px;margin:12px auto 0;padding:12px 16px;font-size:14px;border:1px solid #E3E7EC;border-radius:12px;background:#fff';
+  bar.innerHTML='Ваш город — <b>'+cityName+'</b>?'
+    +'<button id="barYes" style="padding:6px 16px;border:0;border-radius:999px;background:#2B5CFF;color:#fff;font-weight:600;cursor:pointer">'+yesLabel+'</button>'
+    +'<button id="barNo" style="padding:6px 16px;border:1px solid #E3E7EC;border-radius:999px;background:#fff;color:#6B7280;cursor:pointer">Выбрать другой</button>';
+  document.body.insertBefore(bar,document.body.firstChild);
+  document.getElementById('barYes').onclick=function(){hideBar();onYes();};
+  document.getElementById('barNo').onclick=function(){hideBar();onNo();};
+}
+
 function detect(){
   var saved=getSaved();
   if(saved&&findCity(saved)) return;
@@ -81,26 +99,27 @@ function detect(){
     .then(function(r){return r.json();})
     .then(function(d){
       if(!d||!d.success) return;
+      /* 1. Город распознан по названию — плашка с подтверждением */
       var hit=null;
       CITIES.forEach(function(c){
         if(c.aliases.some(function(a){return norm(a)===norm(d.city);})) hit=c;
       });
-      if(hit){save(hit.slug);return;}
+      if(hit){
+        showBar(hit.name,'Да, верно',
+          function(){save(hit.slug);},
+          function(){openModal(null);}
+        );
+        return;
+      }
+      /* 2. Вернулась Москва, но координаты — Зеленоград: плашка Зеленограда */
       var isMsk=(norm(d.city)==='москва'||norm(d.city)==='moscow');
       if(isMsk&&inZel(d)){
-        /* Плашка: IP из ЗелАО, но город определился как Москва */
-        var bar=document.createElement('div');
-        bar.id='zelBar';
-        bar.style.cssText='display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;max-width:960px;margin:12px auto 0;padding:12px 16px;font-size:14px;border:1px solid #E3E7EC;border-radius:12px;background:#fff';
-        bar.innerHTML='Ваш город — <b>Зеленоград</b>?'
-          +'<button id="zelYes" style="padding:6px 16px;border:0;border-radius:999px;background:#2B5CFF;color:#fff;font-weight:600;cursor:pointer">Да, перейти</button>'
-          +'<button id="zelNo" style="padding:6px 16px;border:1px solid #E3E7EC;border-radius:999px;background:#fff;color:#6B7280;cursor:pointer">Нет, оставить Москву</button>';
-        document.body.insertBefore(bar,document.body.firstChild);
-        document.getElementById('zelYes').onclick=function(){pickCity('moskva/podmoskovie/zelenograd');};
-        document.getElementById('zelNo').onclick=function(){save('moskva');bar.remove();};
-      }else if(isMsk){
-        save('moskva');
+        showBar('Зеленоград','Да, перейти',
+          function(){pickCity('moskva/podmoskovie/zelenograd');},
+          function(){save('moskva');openModal(null);}
+        );
       }
+      /* Москва без зеленоградских координат попадает в пункт 1 — у неё есть алиас */
     }).catch(function(){});
 }
 
@@ -129,4 +148,5 @@ if(cl){cl.innerHTML=CITIES.map(function(c){return '<a href="'+cityPath(c)+'">'+c
 
 detect();
 })();
+
 
