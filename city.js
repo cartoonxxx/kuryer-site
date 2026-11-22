@@ -44,12 +44,22 @@ function save(slug){try{localStorage.setItem('city',slug);}catch(e){}}
 function getSaved(){try{return localStorage.getItem('city');}catch(e){return null;}}
 
 var pendingService=null;
-function openModal(s){pendingService=s||null;modal.classList.add('open');}
-function closeModal(){modal.classList.remove('open');}
+var modal=null;
+
+/* Открытие/закрытие — напрямую через display, классы тут не работают:
+   инлайновый display:none перебивает любое CSS-правило */
+function openModal(s){
+  pendingService=s||null;
+  if(modal)modal.style.display='flex';
+}
+function closeModal(){if(modal)modal.style.display='none';}
 function pickCity(slug){
   save(slug);
   var c=findCity(slug);
-  if(c){modal.classList.remove('open');location.href=cityPath(c);}
+  if(c){
+    closeModal();
+    location.href=cityPath(c)+(pendingService?pendingService+'/':'');
+  }
   return false;
 }
 function goCity(service){
@@ -95,7 +105,7 @@ function detect(){
 }
 
 /* Модалка выбора города — создаётся скриптом, разметка в HTML не нужна */
-var modal=document.createElement('div');
+modal=document.createElement('div');
 modal.id='cityModal';
 modal.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);align-items:center;justify-content:center;z-index:10';
 modal.innerHTML='<div style="background:#fff;border-radius:14px;padding:24px;max-width:360px;width:90%;max-height:85vh;overflow-y:auto;text-align:center;font-family:inherit">'
@@ -119,3 +129,4 @@ if(cl){cl.innerHTML=CITIES.map(function(c){return '<a href="'+cityPath(c)+'">'+c
 
 detect();
 })();
+
