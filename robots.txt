@@ -5,6 +5,8 @@ Disallow: /*?from=
 Disallow: /*?yclid=
 Disallow: /*?gclid=
 Disallow: /*?openstat=
+Allow: /favicon-32.png
+Allow: /apple-touch-icon.png
 
 User-agent: Yandex
 Allow: /
