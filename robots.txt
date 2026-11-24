@@ -28,4 +28,4 @@ Disallow: /*?openstat=
 User-agent: Googlebot-Image
 Allow: /
 
-Sitemap: https://couriercenter.ru/sitemap.xml
+Sitemap: https://www.couriercenter.ru/sitemap.xml
